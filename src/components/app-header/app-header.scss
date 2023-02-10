@@ -1,0 +1,53 @@
+$appHeader: #FFFFFF;
+$blogTitle: rgba(0, 0, 0, 0.85);
+$signInButton: rgba(0, 0, 0, 0.85);
+$signUpButton: #52C41A;
+$signUpButtonHover: #1890FF;
+
+
+.appHeader{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  background-color: $appHeader;
+}
+
+.appHeader__blogTitle {
+  font-family: 'Inter UI', sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  color: $blogTitle;
+  margin-left: 20px;
+}
+
+.appHeader__sighButtons {
+  display: flex;
+  gap: 30px;
+}
+
+.appHeader__signInButton {
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter UI', sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  color: $signInButton;
+  background-color: transparent;
+}
+
+.appHeader__signUpButton {
+  font-family: 'Inter UI', sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  color: $signUpButton;
+  background-color: transparent;
+  border: 1px solid $signUpButton;
+  border-radius: 5px;
+  padding: 10px 20px;
+}
+
+.appHeader__signUpButton:hover {
+  background-color: $signUpButtonHover;
+  color: #FFFFFF;
+}

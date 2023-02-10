@@ -1,0 +1,8 @@
+$active: #1890FF;
+
+.ant-pagination-item-active {
+  background-color: $active !important;
+}
+.ant-pagination-item-active a {
+  color: white !important;
+}

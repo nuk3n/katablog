@@ -19,5 +19,6 @@ export const getArticles =
 export const getArticle = (slug) => async (dispatch) => {
   const request = await fetch(`${rootUrl}/articles/${slug}`);
   const { article } = await request.json();
+  console.log(article);
   return article;
 };

@@ -1,0 +1,113 @@
+$title: #1890ff;
+$article: #ffffff;
+$publishDate: rgba(0, 0, 0, 0.5);
+
+.articleFull {
+  margin: 10px auto;
+  width: 75%;
+  background-color: $article;
+  box-shadow: 0 0.6087964177131653px 2.9332919120788574px 0 #00000005,
+    0 1.4630224704742432px 7.049108028411865px 0 #00000007, 0 2.7547414302825928px 13.272845268249512px 0 #00000009,
+    0 4.91398811340332px 23.67648696899414px 0 #0000000b, 0 9.19107437133789px 44.28426742553711px 0 #0000000d,
+    0 22px 106px 0 #00000012;
+}
+
+.articleFull__preview {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.articleFull__info {
+  flex-basis: 75%;
+  margin: 20px 0 15px 20px;
+  flex-wrap: wrap;
+}
+
+.articleFull__header {
+  display: flex;
+}
+
+.articleFull__headerTitle {
+  font-family: Inter, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  color: $title;
+}
+
+.likeButton {
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.tagList {
+  list-style: none;
+  padding: 0;
+  background: transparent;
+}
+
+.tag {
+  display: inline-block;
+  padding: 2px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0em;
+}
+
+.articleFull__text {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  margin-top: 5px;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.articleFull__publishInfo {
+  display: flex;
+  gap: 12px;
+  margin: 15px 15px 0 0;
+}
+
+.articleFull__publishDetails {
+}
+
+.articleFull__authorName {
+  font-family: Inter, sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+}
+
+.articleFull__publishDate {
+  margin-top: -5px;
+  font-family: Inter, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0px;
+  color: $publishDate;
+}
+
+.articleFull__profilePic {
+  width: 46px;
+  height: 46px;
+}
+
+.articleFull__fullText {
+  margin-left: 20px;
+}

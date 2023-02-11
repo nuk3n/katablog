@@ -1,9 +1,12 @@
 import './app-header.scss';
+import { Link } from 'react-router-dom';
 
 function AppHeader() {
   return (
     <div className="appHeader">
-      <div className="appHeader__blogTitle">Realworld Blog</div>
+      <Link to="/" className="appHeader__blogTitle">
+        Realworld Blog
+      </Link>
       <div className="appHeader__sighButtons">
         <button type="button" className="appHeader__signInButton">
           Sign in

@@ -4,16 +4,19 @@ import { HeartOutlined } from '@ant-design/icons';
 import uuid from 'react-uuid';
 import { format } from 'date-fns';
 import './article-short.scss';
+import { Link, withRouter } from 'react-router-dom';
 
 function ArticleShort({
   articleInfo: {
     title,
+    slug,
     favoritesCount,
     description,
     tagList,
     createdAt,
     author: { username, image },
   },
+  history,
 }) {
   const tags = tagList.map((tag) =>
     tag.length === 0 ? null : (
@@ -28,7 +31,9 @@ function ArticleShort({
     <div className="appBody__shortArticle">
       <div className="shortArticle__info">
         <div className="shortArticle__header">
-          <div className="shortArticle__headerTitle">{title}</div>
+          <div className="shortArticle__headerTitle" onClick={() => history.push(`/articles/${slug}`)}>
+            {title}
+          </div>
           <Button type="text" icon={<HeartOutlined />}>
             {favoritesCount}
           </Button>
@@ -47,4 +52,4 @@ function ArticleShort({
   );
 }
 
-export default ArticleShort;
+export default withRouter(ArticleShort);

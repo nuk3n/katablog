@@ -7,9 +7,9 @@ import ArticleFull from './article-full';
 function AppBody() {
   return (
     <div className="appBody">
-      <ArticleFull />
-      {/*<ArticlesList />*/}
-      {/*<Pagination />*/}
+      {/*<ArticleFull />*/}
+      <ArticlesList />
+      <Pagination />
     </div>
   );
 }

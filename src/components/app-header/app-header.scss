@@ -1,11 +1,10 @@
-$appHeader: #FFFFFF;
+$appHeader: #ffffff;
 $blogTitle: rgba(0, 0, 0, 0.85);
 $signInButton: rgba(0, 0, 0, 0.85);
-$signUpButton: #52C41A;
-$signUpButtonHover: #1890FF;
+$signUpButton: #52c41a;
+$signUpButtonHover: #1890ff;
 
-
-.appHeader{
+.appHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -49,5 +48,5 @@ $signUpButtonHover: #1890FF;
 
 .appHeader__signUpButton:hover {
   background-color: $signUpButtonHover;
-  color: #FFFFFF;
+  color: #ffffff;
 }

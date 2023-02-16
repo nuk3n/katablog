@@ -1,13 +1,18 @@
 import ArticleShort from '../article-short';
 import './articles-list.scss';
 import * as actions from '../../../store/actions';
+import LoadingIndicator from '../../loadingIndicator';
+import ErrorAlert from '../../errorAlert';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 
-function ArticlesList({ getArticles, articles }) {
+function ArticlesList({ getArticles, articles, status }) {
   useEffect(() => {
     getArticles();
   }, [getArticles]);
+
+  if (status === 'loading') return <LoadingIndicator />;
+  if (status === 'error') return <ErrorAlert />;
 
   const articlesList = articles.map((article) => (
     <li key={article.slug}>
@@ -23,6 +28,7 @@ function ArticlesList({ getArticles, articles }) {
 }
 
 const mapStateToProps = (state) => ({
+  status: state.status,
   articles: state.articles,
 });
 

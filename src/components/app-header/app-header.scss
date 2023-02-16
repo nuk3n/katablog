@@ -3,6 +3,9 @@ $blogTitle: rgba(0, 0, 0, 0.85);
 $signInButton: rgba(0, 0, 0, 0.85);
 $signUpButton: #52c41a;
 $signUpButtonHover: #1890ff;
+$createArticle: #52c41a;
+$logOut: #000000bf;
+$profileInfo: rgba(0, 0, 0, 0.85);
 
 .appHeader {
   display: flex;
@@ -18,14 +21,22 @@ $signUpButtonHover: #1890ff;
   line-height: 28px;
   color: $blogTitle;
   margin-left: 20px;
+  text-decoration: none;
 }
 
-.appHeader__sighButtons {
+.appHeader__sighLinks {
   display: flex;
   gap: 30px;
+  align-items: center;
 }
 
-.appHeader__signInButton {
+.appHeader__loggedInMenu {
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.appHeader__signInLink {
   border: none;
   cursor: pointer;
   font-family: 'Inter UI', sans-serif;
@@ -35,7 +46,7 @@ $signUpButtonHover: #1890ff;
   background-color: transparent;
 }
 
-.appHeader__signUpButton {
+.appHeader__signUpLink {
   font-family: 'Inter UI', sans-serif;
   font-size: 18px;
   line-height: 28px;
@@ -46,7 +57,54 @@ $signUpButtonHover: #1890ff;
   padding: 10px 20px;
 }
 
-.appHeader__signUpButton:hover {
+.appHeader__signUpLink:hover {
   background-color: $signUpButtonHover;
   color: #ffffff;
+}
+
+.appHeader__createArticle {
+  padding: 6px 10px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+  color: $createArticle;
+  text-decoration: none;
+  border: 1px solid $createArticle;
+  border-radius: 5px;
+}
+
+.appHeader__profileInfo {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  color: $profileInfo;
+}
+
+.appHeader__profileName {
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.appHeader__profilePic {
+  width: 46px;
+  height: 46px;
+}
+
+.appHeader__logOut {
+  margin-right: 20px;
+  padding: 10px 15px;
+  font-family: 'Inter', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  border: 1px solid $logOut;
+  border-radius: 5px;
+  background-color: transparent;
 }

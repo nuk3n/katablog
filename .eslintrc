@@ -23,8 +23,10 @@
   "plugins": ["react", "jsx-a11y", "import", "react-hooks", "prettier"],
   "rules": {
     "react/destructuring-assignment": "off",
+    "react/jsx-props-no-spreading": "off",
     "consistent-return": "off",
     "no-plusplus": "off",
+    "no-useless-escape": "off",
     "react/require-default-props": "off",
     "jsx-a11y/control-has-associated-label": "off",
     "react/state-in-constructor": 0,

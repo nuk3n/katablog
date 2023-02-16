@@ -4,6 +4,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
 
 .articleFull {
   margin: 10px auto;
+  padding-bottom: 10px;
   width: 75%;
   background-color: $article;
   box-shadow: 0 0.6087964177131653px 2.9332919120788574px 0 #00000005,
@@ -110,4 +111,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
 
 .articleFull__fullText {
   margin-left: 20px;
+  font-family: 'Inter UI', sans-serif;
+  font-size: 20px;
+  line-height: 28px;
 }

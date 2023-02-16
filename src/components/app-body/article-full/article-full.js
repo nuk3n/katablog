@@ -1,6 +1,7 @@
 /* eslint-disable */
 import * as actions from '../../../store/actions';
 import { useEffect, useState } from 'react';
+import { getArticle } from '../../../requests/requests';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import { Button } from 'antd';
@@ -8,15 +9,25 @@ import { HeartOutlined } from '@ant-design/icons';
 import uuid from 'react-uuid';
 import { format } from 'date-fns';
 import './article-full.scss';
+import LoadingIndicator from '../../loadingIndicator';
+import ErrorAlert from '../../errorAlert';
 
-function ArticleFull({ getArticle, slug }) {
+function ArticleFull({ slug }) {
   const [article, setArticle] = useState();
+  const [status, setStatus] = useState('loading');
 
   useEffect(() => {
-    getArticle(slug).then((art) => setArticle(art));
+    getArticle(slug)
+      .then((art) => {
+        setStatus('fetched');
+        setArticle(art);
+      })
+      .catch(() => setStatus('error'));
   }, []);
 
-  if (!article) return;
+  if (status === 'error') return <ErrorAlert />;
+
+  if (status === 'loading') return <LoadingIndicator />;
 
   const {
     title,

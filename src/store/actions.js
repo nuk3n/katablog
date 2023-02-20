@@ -1,4 +1,3 @@
-/* eslint-disable */
 const rootUrl = 'https://blog.kata.academy/api';
 
 const setArticlesList = (articles, total) => ({
@@ -22,17 +21,19 @@ const setStatus = (status) => ({
   status,
 });
 
-const setUser = (user) => ({
-  type: 'setUser',
-  user,
-});
-
 export const getArticles =
   (page = 1) =>
   async (dispatch) => {
     const offset = (page - 1) * 20;
     try {
-      const request = await fetch(`${rootUrl}/articles?&offset=${offset}`);
+      const token = JSON.parse(localStorage.getItem('token'));
+      const request = await fetch(`${rootUrl}/articles?&offset=${offset}`, {
+        headers: {
+          Authorization: `Token ${token}`,
+          Accept: 'application/json',
+          'Content-type': 'application/json',
+        },
+      });
       const { articles, articlesCount } = await request.json();
       dispatch(setStatus('fetched'));
       dispatch(setArticlesList(articles, articlesCount));
@@ -65,4 +66,31 @@ export const signIn = (email, password) => async (dispatch) => {
     dispatch(setIsLoggedIn(true));
   }
   return response;
+};
+
+export const checkUser = () => async (dispatch) => {
+  const token = JSON.parse(localStorage.getItem('token'));
+  const request = await fetch(`${rootUrl}/user`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Token ${token}`,
+      Accept: 'application/json',
+      'Content-type': 'application/json',
+    },
+  });
+  if (request.status === 200) {
+    const {
+      // eslint-disable-next-line no-shadow
+      user: { username, token, image, email },
+    } = await request.json();
+    localStorage.setItem('token', JSON.stringify(token));
+    dispatch(setUserData(username, email, image));
+    dispatch(setIsLoggedIn(true));
+    dispatch(setStatus('fetched'));
+  }
+  if (request.status === 401) {
+    dispatch(setIsLoggedIn(false));
+    dispatch(setUserData(null, null, null));
+    localStorage.removeItem('token');
+  }
 };

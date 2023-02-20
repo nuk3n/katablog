@@ -1,10 +1,11 @@
 import './sign-in-page.scss';
 import * as actions from '../../store/actions';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
-function SignInPage({ signIn }) {
+function SignInPage({ signIn, history }) {
   const {
     register,
     formState: { errors },
@@ -16,15 +17,21 @@ function SignInPage({ signIn }) {
   });
 
   const onSubmit = ({ email, password }) => {
-    signIn(email, password).then((res) => {
-      if (res.errors) {
-        setError('submit', {
-          type: 'server',
-          message: 'invalid email or password',
-        });
-      }
-    });
-    reset();
+    signIn(email, password)
+      .then((res) => {
+        if (res.errors) {
+          setError('submit', {
+            type: 'server',
+            message: 'invalid email or password',
+          });
+        } else {
+          reset();
+          history.push('/');
+        }
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
   };
 
   return (
@@ -80,4 +87,4 @@ function SignInPage({ signIn }) {
   );
 }
 
-export default connect(null, actions)(SignInPage);
+export default connect(null, actions)(withRouter(SignInPage));

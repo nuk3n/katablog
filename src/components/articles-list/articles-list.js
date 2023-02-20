@@ -1,15 +1,16 @@
 import ArticleShort from '../article-short';
 import './articles-list.scss';
-import * as actions from '../../../store/actions';
-import LoadingIndicator from '../../loadingIndicator';
-import ErrorAlert from '../../errorAlert';
+import * as actions from '../../store/actions';
+import LoadingIndicator from '../loadingIndicator';
+import ErrorAlert from '../errorAlert';
+import Pagination from '../pagination';
 import { connect } from 'react-redux';
 import { useEffect } from 'react';
 
-function ArticlesList({ getArticles, articles, status }) {
+function ArticlesList({ getArticles, articles, status, page = 1 }) {
   useEffect(() => {
-    getArticles();
-  }, [getArticles]);
+    getArticles(page);
+  }, [getArticles, page]);
 
   if (status === 'loading') return <LoadingIndicator />;
   if (status === 'error') return <ErrorAlert />;
@@ -21,8 +22,9 @@ function ArticlesList({ getArticles, articles, status }) {
   ));
 
   return (
-    <div className="appBody__articleListWrapper">
-      <ul className="appBody__articleList">{articlesList}</ul>
+    <div className="articleListWrapper">
+      <ul className="articleList">{articlesList}</ul>
+      <Pagination currentPage={page} />
     </div>
   );
 }

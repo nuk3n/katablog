@@ -2,48 +2,41 @@ $title: #1890ff;
 $article: #ffffff;
 $publishDate: rgba(0, 0, 0, 0.5);
 
-.articleFull {
-  margin: 10px auto;
-  padding-bottom: 10px;
-  width: 75%;
+.shortArticle {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 5px;
   background-color: $article;
+  margin-bottom: 20px;
   box-shadow: 0 0.6087964177131653px 2.9332919120788574px 0 #00000005,
     0 1.4630224704742432px 7.049108028411865px 0 #00000007, 0 2.7547414302825928px 13.272845268249512px 0 #00000009,
     0 4.91398811340332px 23.67648696899414px 0 #0000000b, 0 9.19107437133789px 44.28426742553711px 0 #0000000d,
     0 22px 106px 0 #00000012;
 }
 
-.articleFull__preview {
-  display: flex;
-  justify-content: space-between;
-  border-radius: 5px;
-  margin-bottom: 20px;
+.heart {
+  fill: #f5222d;
 }
 
-.articleFull__info {
+.shortArticle__info {
   flex-basis: 75%;
   margin: 20px 0 15px 20px;
   flex-wrap: wrap;
 }
 
-.articleFull__header {
+.shortArticle__header {
   display: flex;
 }
 
-.articleFull__headerTitle {
+.shortArticle__headerTitle {
+  background: transparent;
+  border: none;
+  padding: 0;
   font-family: Inter, sans-serif;
   font-size: 20px;
   font-weight: 400;
   line-height: 28px;
   color: $title;
-}
-
-.likeButton {
-  border: none;
-  font: inherit;
-  color: inherit;
-  background-color: transparent;
-  cursor: pointer;
 }
 
 .tagList {
@@ -54,6 +47,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
 
 .tag {
   display: inline-block;
+  margin-right: 5px;
   padding: 2px 5px;
   border: 1px solid rgba(0, 0, 0, 0.5);
   border-radius: 2px;
@@ -64,7 +58,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
   letter-spacing: 0em;
 }
 
-.articleFull__text {
+.shortArticle__text {
   max-width: 100%;
   overflow-wrap: anywhere;
   margin-top: 5px;
@@ -74,19 +68,18 @@ $publishDate: rgba(0, 0, 0, 0.5);
   line-height: 22px;
   letter-spacing: 0;
   text-align: left;
-  color: rgba(0, 0, 0, 0.5);
 }
 
-.articleFull__publishInfo {
+.shortArticle__publishInfo {
   display: flex;
   gap: 12px;
   margin: 15px 15px 0 0;
 }
 
-.articleFull__publishDetails {
+.shortArticle__publishDetails {
 }
 
-.articleFull__authorName {
+.shortArticle__authorName {
   font-family: Inter, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -94,7 +87,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
   letter-spacing: 0em;
 }
 
-.articleFull__publishDate {
+.shortArticle__publishDate {
   margin-top: -5px;
   font-family: Inter, sans-serif;
   font-size: 12px;
@@ -104,14 +97,7 @@ $publishDate: rgba(0, 0, 0, 0.5);
   color: $publishDate;
 }
 
-.articleFull__profilePic {
+.shortArticle__profilePic {
   width: 46px;
   height: 46px;
-}
-
-.articleFull__fullText {
-  margin-left: 20px;
-  font-family: 'Inter UI', sans-serif;
-  font-size: 20px;
-  line-height: 28px;
 }

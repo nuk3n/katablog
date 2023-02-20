@@ -1,11 +1,13 @@
 import { editProfile } from '../../requests/requests';
 import * as actions from '../../store/actions';
+import LoadingIndicator from '../loadingIndicator';
 import { useForm } from 'react-hook-form';
 import './edit-profile-page.scss';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { toast } from 'react-toastify';
 
-function EditProfilePage({ isLoggedIn, setUserData, userData }) {
+function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
   const {
     register,
     handleSubmit,
@@ -14,13 +16,16 @@ function EditProfilePage({ isLoggedIn, setUserData, userData }) {
   } = useForm({
     mode: 'onChange',
   });
+  if (status === 'loading') return <LoadingIndicator />;
   if (!isLoggedIn) return <Redirect to="/sign-in" />;
 
   const onSubmit = ({ username, email, password, avatarUrl }) => {
-    editProfile(username, email, password, avatarUrl).then((body) => {
-      localStorage.setItem('token', JSON.stringify(body.user.token));
-      setUserData(body.user.username, body.user.email, body.user.image);
-    });
+    editProfile(username, email, password, avatarUrl)
+      .then((body) => {
+        localStorage.setItem('token', JSON.stringify(body.user.token));
+        setUserData(body.user.username, body.user.email, body.user.image);
+      })
+      .catch((e) => toast.error(e));
     reset();
   };
 
@@ -97,7 +102,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData }) {
             defaultValue={userData.image || null}
             {...register('avatarUrl', {
               pattern: {
-                value: /^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/,
+                value: /^(http(s):\/\/.)[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_.~#?&/=]*)$/,
                 message: 'correct url is required',
               },
             })}
@@ -114,6 +119,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData }) {
 
 const mapStateToProps = (state) => ({
   userData: state.userData,
+  status: state.status,
   isLoggedIn: state.isLoggedIn,
 });
 

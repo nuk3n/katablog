@@ -1,0 +1,20 @@
+$addTag: #1890ff;
+
+.articlePage__tags {
+  display: flex;
+  align-self: flex-start;
+  margin-left: 20px;
+}
+
+.articlePage__addTagButton {
+  width: 140px;
+  height: 33px;
+  margin-left: 20px;
+  padding: 8px 40px;
+  align-self: flex-end;
+  color: $addTag;
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid $addTag;
+  border-radius: 4px;
+}

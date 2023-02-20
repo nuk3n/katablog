@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 function AppHeader({ userData, isLoggedIn, setIsLoggedIn }) {
   if (isLoggedIn) {
     const logOut = () => {
-      localStorage.removeItem('user');
+      localStorage.removeItem('token');
       setIsLoggedIn(false);
     };
     const { username, image } = userData;
@@ -17,7 +17,7 @@ function AppHeader({ userData, isLoggedIn, setIsLoggedIn }) {
           Realworld Blog
         </Link>
         <div className="appHeader__loggedInMenu">
-          <Link to="/" className="appHeader__createArticle">
+          <Link to="/new-article" className="appHeader__createArticle">
             Create article
           </Link>
           <Link to="/profile" className="appHeader__profileInfo">

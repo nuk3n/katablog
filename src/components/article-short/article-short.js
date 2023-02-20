@@ -1,23 +1,27 @@
-/* eslint-disable */
+import useFavorite from '../hooks/useFavorite';
 import { Button } from 'antd';
-import { HeartOutlined } from '@ant-design/icons';
 import uuid from 'react-uuid';
 import { format } from 'date-fns';
 import './article-short.scss';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
 function ArticleShort({
   articleInfo: {
     title,
     slug,
     favoritesCount,
+    favorited,
     description,
     tagList,
     createdAt,
     author: { username, image },
   },
   history,
+  isLoggedIn,
 }) {
+  const { isFavorite, favorites, onFavoriteClick, toastError } = useFavorite(favorited, favoritesCount, slug);
   const tags = tagList.map((tag) =>
     tag.length === 0 ? null : (
       <li key={uuid()} className="tag">
@@ -28,14 +32,18 @@ function ArticleShort({
   const publishDate = format(new Date(createdAt), 'MMMM d, yyyy');
 
   return (
-    <div className="appBody__shortArticle">
+    <div className="shortArticle">
       <div className="shortArticle__info">
         <div className="shortArticle__header">
-          <div className="shortArticle__headerTitle" onClick={() => history.push(`/articles/${slug}`)}>
+          <button type="button" className="shortArticle__headerTitle" onClick={() => history.push(`/articles/${slug}`)}>
             {title}
-          </div>
-          <Button type="text" icon={<HeartOutlined />}>
-            {favoritesCount}
+          </button>
+          <Button
+            type="text"
+            icon={isFavorite ? <HeartFilled style={{ color: '#FF0707' }} /> : <HeartOutlined />}
+            onClick={isLoggedIn ? onFavoriteClick : toastError}
+          >
+            {favorites}
           </Button>
         </div>
         <ul className="tagList">{tags}</ul>
@@ -52,4 +60,8 @@ function ArticleShort({
   );
 }
 
-export default withRouter(ArticleShort);
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.isLoggedIn,
+});
+
+export default connect(mapStateToProps)(withRouter(ArticleShort));

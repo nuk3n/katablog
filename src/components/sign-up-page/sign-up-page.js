@@ -2,7 +2,7 @@ import './sign-up-page.scss';
 import { registerUser } from '../../requests/requests';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function SignUpPage() {
@@ -18,27 +18,29 @@ function SignUpPage() {
   });
   const passw = watch('password', '');
   const onSubmit = ({ username, email, password }) => {
-    registerUser(username, email, password).then((res) => {
-      if (res.errors) {
-        if (res.errors.username)
-          setError('username', {
-            type: 'server',
-            message: res.errors.username,
-          });
-        if (res.errors.email)
-          setError('email', {
-            type: 'server',
-            message: res.errors.email,
-          });
-        if (res.errors.password)
-          setError('password', {
-            type: 'server',
-            message: res.errors.password,
-          });
-        return;
-      }
-      toast.success('Successful registration!');
-    });
+    registerUser(username, email, password)
+      .then((res) => {
+        if (res.errors) {
+          if (res.errors.username)
+            setError('username', {
+              type: 'server',
+              message: res.errors.username,
+            });
+          if (res.errors.email)
+            setError('email', {
+              type: 'server',
+              message: res.errors.email,
+            });
+          if (res.errors.password)
+            setError('password', {
+              type: 'server',
+              message: res.errors.password,
+            });
+          return;
+        }
+        toast.success('Successful registration!');
+      })
+      .catch((e) => toast.error(e.message));
     reset();
   };
   return (
@@ -137,7 +139,6 @@ function SignUpPage() {
           Sign In.
         </Link>
       </div>
-      <ToastContainer />
     </div>
   );
 }

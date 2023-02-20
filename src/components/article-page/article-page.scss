@@ -1,0 +1,133 @@
+$article: #ffffff;
+$inputBorder: #d9d9d9;
+$submitButton: #1890ff;
+$deleteButton: #f5222d;
+$addTag: #1890ff;
+
+.articlePage {
+  display: flex;
+  flex-direction: column;
+  margin: 35px auto;
+  width: 70%;
+  align-items: center;
+  background-color: $article;
+  box-shadow: 0 0.6087964177131653px 2.9332919120788574px 0 #00000005,
+    0 1.4630224704742432px 7.049108028411865px 0 #00000007, 0 2.7547414302825928px 13.272845268249512px 0 #00000009,
+    0 4.91398811340332px 23.67648696899414px 0 #0000000b, 0 9.19107437133789px 44.28426742553711px 0 #0000000d,
+    0 22px 106px 0 #00000012;
+  border-radius: 6px;
+}
+
+.articlePage__header {
+  margin-top: 50px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.articlePage__form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.articlePage__label {
+  width: 95%;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+
+.articlePage__input {
+  padding: 0 12px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  border: 1px solid $inputBorder;
+  border-radius: 4px;
+}
+
+.articlePage__title {
+}
+
+.articlePage__shortDescription {
+}
+
+.articlePage__text {
+  height: 170px;
+  padding-top: 10px;
+}
+
+.articlePage__text::placeholder {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.articlePage__submitButton {
+  align-self: flex-start;
+  margin: 20px 0 0 20px;
+  padding: 8px 141px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: white;
+  background-color: $submitButton;
+  border: none;
+  border-radius: 4px;
+}
+
+.articlePage__tagInput {
+  width: 300px;
+  height: 28px;
+  margin-top: 5px;
+  padding-left: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.articlePage__tagDeleteButton {
+  margin: 0 15px;
+  padding: 8px 36px;
+  color: $deleteButton;
+  background-color: transparent;
+  border: 1px solid $deleteButton;
+  border-radius: 4px;
+}
+
+.articlePage__tagList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.articlePage__addTagButton {
+  width: 140px;
+  height: 33px;
+  padding: 8px 40px;
+  align-self: flex-end;
+  color: $addTag;
+  background-color: transparent;
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid $addTag;
+  border-radius: 4px;
+}
+
+.articlePage__tagsSection {
+  display: flex;
+  align-items: center;
+}

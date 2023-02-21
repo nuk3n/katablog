@@ -25,14 +25,6 @@ function App({ checkUser }) {
         <AppHeader />
         <Switch>
           <Route
-            path="/:page?"
-            render={({ match }) => {
-              const { page } = match.params;
-              return <ArticlesList page={page} />;
-            }}
-            exact
-          />
-          <Route
             path="/articles/:slug"
             render={({ match }) => {
               const { slug } = match.params;
@@ -50,6 +42,14 @@ function App({ checkUser }) {
               const { slug } = match.params;
               return <EditArticlePage slug={slug} />;
             }}
+          />
+          <Route
+            path="/:page?"
+            render={({ match }) => {
+              const { page } = match.params;
+              return <ArticlesList page={page} />;
+            }}
+            exact
           />
           <Redirect to="/" />
         </Switch>

@@ -1,14 +1,14 @@
 import * as actions from '../../store/actions';
 import useFavorite from '../hooks/useFavorite';
-import { getArticle, deleteArticle } from '../../requests/requests';
+import { getArticle, deleteArticle } from '../../store/actions';
 import LoadingIndicator from '../loadingIndicator';
 import ErrorAlert from '../errorAlert';
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import ReactMarkdown from 'react-markdown';
 import { connect } from 'react-redux';
 import { Button, message, Popconfirm } from 'antd';
 import { HeartFilled, HeartOutlined } from '@ant-design/icons';
-import uuid from 'react-uuid';
 import { format } from 'date-fns';
 import { Link, withRouter } from 'react-router-dom';
 import './article-full.scss';
@@ -53,11 +53,10 @@ function ArticleFull({ userData, slug, history, isLoggedIn }) {
     createdAt,
     author: { username, image },
   } = article;
-
-  const tags = tagList.map((tag) =>
-    tag.length === 0 ? null : (
-      <li key={uuid()} className="tag">
-        {tag}
+  const tags = Object.values(tagList).map((tagItem) =>
+    tagItem.tag.length === 0 ? null : (
+      <li key={tagItem.id} className="tag">
+        {tagItem.tag}
       </li>
     )
   );
@@ -76,6 +75,11 @@ function ArticleFull({ userData, slug, history, isLoggedIn }) {
   const cancel = () => {
     message.error('You clicked no');
   };
+
+  const editButtonsClass = classNames({
+    articleFull__editButtons: true,
+    'articleFull__editButtons--show': username === userData.username,
+  });
 
   return (
     <div className="articleFull">
@@ -105,10 +109,7 @@ function ArticleFull({ userData, slug, history, isLoggedIn }) {
 
         <div className="articleFull__description">
           {description}
-          <div
-            className="articleFull__editButtons"
-            style={{ display: username === userData.username ? 'block' : 'none' }}
-          >
+          <div className={editButtonsClass}>
             <Popconfirm
               title="Delete the article"
               description="Are you sure to delete this article?"

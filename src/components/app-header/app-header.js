@@ -1,4 +1,5 @@
 import './app-header.scss';
+import { removeToken } from '../../store/local-storage-API';
 import defaultPic from '../../icons/profile.png';
 import * as actions from '../../store/actions';
 import { Link } from 'react-router-dom';
@@ -7,7 +8,7 @@ import { connect } from 'react-redux';
 function AppHeader({ userData, isLoggedIn, setIsLoggedIn }) {
   if (isLoggedIn) {
     const logOut = () => {
-      localStorage.removeItem('token');
+      removeToken();
       setIsLoggedIn(false);
     };
     const { username, image } = userData;

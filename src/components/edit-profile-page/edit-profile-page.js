@@ -1,6 +1,7 @@
-import { editProfile } from '../../requests/requests';
+import { editProfile } from '../../store/actions';
 import * as actions from '../../store/actions';
 import LoadingIndicator from '../loadingIndicator';
+import HookFormAlertDiv from '../hook-form-alert-div';
 import { useForm } from 'react-hook-form';
 import './edit-profile-page.scss';
 import { Redirect } from 'react-router-dom';
@@ -16,8 +17,8 @@ function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
   } = useForm({
     mode: 'onChange',
   });
-  if (status === 'loading') return <LoadingIndicator />;
   if (!isLoggedIn) return <Redirect to="/sign-in" />;
+  if (status === 'loading') return <LoadingIndicator />;
 
   const onSubmit = ({ username, email, password, avatarUrl }) => {
     editProfile(username, email, password, avatarUrl)
@@ -52,9 +53,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.username ? 'block' : 'none' }}>
-          <p>{errors?.username?.message || 'Username must be 3-20 characters(included)'}</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="username" message="Username must be 3-20 characters(included)" />
         <label className="editProfilePage__inputField">
           Email Address
           <br />
@@ -72,9 +71,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.email ? 'block' : 'none' }}>
-          <p>{errors?.email?.message || 'email must be valid email address'}</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="email" message="email must be valid email address" />
         <label className="editProfilePage__inputField">
           New password
           <br />
@@ -89,9 +86,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.password ? 'block' : 'none' }}>
-          <p>password must be 6-40 characters(included)</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="password" message="password must be 6-40 characters(included)" />
         <label className="editProfilePage__inputField">
           Avatar image (url)
           <br />
@@ -108,9 +103,7 @@ function EditProfilePage({ isLoggedIn, setUserData, userData, status }) {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.password ? 'block' : 'none' }}>
-          <p>you should insert url path here</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="avatarUrl" message="you should insert url path here" />
         <input type="submit" className="editProfilePage__saveButton" value="Save" />
       </form>
     </div>

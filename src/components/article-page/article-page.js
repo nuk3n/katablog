@@ -1,11 +1,13 @@
 import './article-page.scss';
+import routes from '../routes';
+import HookFormAlertDiv from '../hook-form-alert-div';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug }) {
+function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug, history }) {
   const {
     register,
     handleSubmit,
@@ -35,8 +37,10 @@ function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug }) {
     const tagsArr = tags.map((tag, i) => tags[i].tag);
     submitArticle(title, shortDescription, text, tagsArr, slug)
       .then((res) => {
-        if (res.ok) toast.success('Successful submit!');
-        else if (res.status === 401) toast.error('Not authorized');
+        if (res.ok) {
+          toast.success('Successful submit!');
+          history.push(routes.base);
+        } else if (res.status === 401) toast.error('Not authorized');
         else toast.error('Something has gone terribly wrong!');
       })
       .catch((e) => toast.error(e.message));
@@ -54,9 +58,7 @@ function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug }) {
             placeholder="Title"
             {...register('title', { required: true })}
           />
-          <div style={{ width: 320, marginTop: -10, color: '#F5222D', display: errors.title ? 'block' : 'none' }}>
-            <p>{errors?.title?.message || 'You should write something here'}</p>
-          </div>
+          <HookFormAlertDiv errors={errors} field="title" message="You should write something here" />
         </label>
         <label className="articlePage__label">
           <span>Short description</span>
@@ -66,16 +68,7 @@ function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug }) {
             placeholder="Short Description"
             {...register('shortDescription', { required: true })}
           />
-          <div
-            style={{
-              width: 320,
-              marginTop: -10,
-              color: '#F5222D',
-              display: errors.shortDescription ? 'block' : 'none',
-            }}
-          >
-            <p>{errors?.shortDescription?.message || 'You should write something here'}</p>
-          </div>
+          <HookFormAlertDiv errors={errors} field="shortDescription" message="You should write something here" />
         </label>
         <label className="articlePage__label">
           <span>Text</span>
@@ -84,9 +77,7 @@ function ArticlePage({ isLoggedIn, pageStatus, article, submitArticle, slug }) {
             placeholder="Text"
             {...register('text', { required: true })}
           />
-          <div style={{ width: 320, marginTop: -10, color: '#F5222D', display: errors.text ? 'block' : 'none' }}>
-            <p>{errors?.text?.message || 'You should write something here'}</p>
-          </div>
+          <HookFormAlertDiv errors={errors} field="text" message="You should write something here" />
         </label>
         <div className="articlePage__label">
           <span>Tags</span>
@@ -129,4 +120,4 @@ const mapStateToProps = (state) => ({
   isLoggedIn: state.isLoggedIn,
 });
 
-export default connect(mapStateToProps)(ArticlePage);
+export default connect(mapStateToProps)(withRouter(ArticlePage));

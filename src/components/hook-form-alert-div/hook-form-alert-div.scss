@@ -1,0 +1,12 @@
+$hookFormAlertDiv: #F5222D;
+
+.hookFormAlertDiv {
+  width: 320px;
+  margin-top: -10px;
+  color: $hookFormAlertDiv;
+  display: none;
+}
+
+.hookFormAlertDiv--show {
+  display: block;
+}

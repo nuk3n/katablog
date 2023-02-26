@@ -1,5 +1,6 @@
 import './sign-in-page.scss';
 import * as actions from '../../store/actions';
+import HookFormAlertDiv from '../hook-form-alert-div';
 import { useForm } from 'react-hook-form';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -53,9 +54,7 @@ function SignInPage({ signIn, history }) {
               },
             })}
           />
-          <div style={{ width: 320, marginTop: -10, color: '#F5222D', display: errors.email ? 'block' : 'none' }}>
-            <p>{errors?.email?.message || 'email must be valid email address'}</p>
-          </div>
+          <HookFormAlertDiv errors={errors} field="email" message="email must be valid email address" />
         </label>
         <label className="signInPage__inputField">
           Password
@@ -68,14 +67,9 @@ function SignInPage({ signIn, history }) {
               required: true,
             })}
           />
-          <div style={{ width: 320, marginTop: -10, color: '#F5222D', display: errors.password ? 'block' : 'none' }}>
-            <p>password must be 6-40 characters(included)</p>
-          </div>
+          <HookFormAlertDiv errors={errors} field="password" message="password must be 6-40 characters(included)" />
         </label>
         <input type="submit" className="signInPage__loginButton" value="Login" {...register('submit')} />
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.submit ? 'block' : 'none' }}>
-          <p>{errors?.submit?.message || 'fuck'}</p>
-        </div>
       </form>
       <div className="signInPage__signUp">
         Don’t have an account?{' '}

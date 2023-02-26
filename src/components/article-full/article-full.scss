@@ -131,6 +131,11 @@ $editButton: #52c41a;
 .articleFull__editButtons {
   margin-right: 15px;
   flex-shrink: 0;
+  display: none;
+}
+
+.articleFull__editButtons--show {
+  display: block;
 }
 
 .articleFull__deleteButton {

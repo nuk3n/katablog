@@ -1,5 +1,6 @@
 import AppHeader from '../app-header';
 import './app.scss';
+import routes from '../routes';
 import ArticlesList from '../articles-list';
 import ArticleFull from '../article-full';
 import SignUpPage from '../sign-up-page';
@@ -8,6 +9,7 @@ import EditProfilePage from '../edit-profile-page';
 import * as actions from '../../store/actions';
 import EditArticlePage from '../editArticlePage';
 import CreateArticlePage from '../create-article-page';
+import { getToken } from '../../store/local-storage-API';
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -15,7 +17,7 @@ import { ToastContainer } from 'react-toastify';
 
 function App({ checkUser }) {
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (getToken()) {
       checkUser();
     }
   });
@@ -25,33 +27,33 @@ function App({ checkUser }) {
         <AppHeader />
         <Switch>
           <Route
-            path="/articles/:slug"
+            path={routes.article}
             render={({ match }) => {
               const { slug } = match.params;
               return <ArticleFull slug={slug} />;
             }}
             exact
           />
-          <Route path="/sign-up" component={SignUpPage} />
-          <Route path="/sign-in" component={SignInPage} />
-          <Route path="/profile" component={EditProfilePage} />
-          <Route path="/new-article" component={CreateArticlePage} />
+          <Route path={routes.signUp} component={SignUpPage} />
+          <Route path={routes.signIn} component={SignInPage} />
+          <Route path={routes.profile} component={EditProfilePage} />
+          <Route path={routes.newArticle} component={CreateArticlePage} />
           <Route
-            path="/articles/:slug/edit"
+            path={routes.editArticle}
             render={({ match }) => {
               const { slug } = match.params;
               return <EditArticlePage slug={slug} />;
             }}
           />
           <Route
-            path="/:page?"
+            path={`${routes.base}:page?`}
             render={({ match }) => {
               const { page } = match.params;
               return <ArticlesList page={page} />;
             }}
             exact
           />
-          <Redirect to="/" />
+          <Redirect to={routes.base} />
         </Switch>
       </div>
       <ToastContainer

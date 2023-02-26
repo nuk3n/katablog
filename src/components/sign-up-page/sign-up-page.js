@@ -1,11 +1,13 @@
 import './sign-up-page.scss';
-import { registerUser } from '../../requests/requests';
+import HookFormAlertDiv from '../hook-form-alert-div';
+import routes from '../routes';
+import { registerUser } from '../../store/actions';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-function SignUpPage() {
+function SignUpPage({ history }) {
   const {
     register,
     formState: { errors },
@@ -39,6 +41,7 @@ function SignUpPage() {
           return;
         }
         toast.success('Successful registration!');
+        history.push(routes.signIn);
       })
       .catch((e) => toast.error(e.message));
     reset();
@@ -64,9 +67,7 @@ function SignUpPage() {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.username ? 'block' : 'none' }}>
-          <p>{errors?.username?.message || 'Username must be 3-20 characters(included)'}</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="username" message="Username must be 3-20 characters(included)" />
         <label className="signUpPage__inputField">
           Email Address
           <br />
@@ -82,9 +83,7 @@ function SignUpPage() {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.email ? 'block' : 'none' }}>
-          <p>{errors?.email?.message || 'email must be valid email address'}</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="email" message="email must be valid email address" />
         <label className="signUpPage__inputField">
           Password
           <br />
@@ -98,9 +97,7 @@ function SignUpPage() {
             })}
           />
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.password ? 'block' : 'none' }}>
-          <p>password must be 6-40 characters(included)</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="password" message="password must be 6-40 characters(included)" />
         <label className="signUpPage__inputField">
           Repeat password
           <br />
@@ -112,11 +109,7 @@ function SignUpPage() {
             })}
           />
         </label>
-        <div
-          style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.repeatPassword ? 'block' : 'none' }}
-        >
-          <p>password и repeat password should match</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="repeatPassword" message="password и repeat password should match" />
         <label className="signUpPage__checkbox">
           <input
             type="checkbox"
@@ -128,14 +121,12 @@ function SignUpPage() {
           />
           I agree to the processing of my personal information
         </label>
-        <div style={{ width: 320, marginTop: -25, color: '#F5222D', display: errors.checkbox ? 'block' : 'none' }}>
-          <p>should agree</p>
-        </div>
+        <HookFormAlertDiv errors={errors} field="checkbox" message="should agree" />
         <input type="submit" className="signUpPage__createButton" value="Create" />
       </form>
       <div className="signUpPage__signIn">
         Already have an account?{' '}
-        <Link to="/sign-in" className="signInPage__signInLink">
+        <Link to={routes.signIn} className="signInPage__signInLink">
           Sign In.
         </Link>
       </div>
@@ -143,4 +134,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default withRouter(SignUpPage);

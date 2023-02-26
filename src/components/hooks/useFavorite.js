@@ -1,4 +1,4 @@
-import { favoriteArticle, unfavoriteArticle } from '../../requests/requests';
+import { favoriteArticle, unfavoriteArticle } from '../../store/actions';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
 

@@ -1,6 +1,6 @@
 import './edit-article-page.scss';
 import ArticlePage from '../article-page';
-import { getArticle, editArticle } from '../../requests/requests';
+import { getArticle, editArticle } from '../../store/actions';
 import ErrorAlert from '../errorAlert';
 import LoadingIndicator from '../loadingIndicator';
 import { useEffect, useState } from 'react';
